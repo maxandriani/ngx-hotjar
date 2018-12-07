@@ -9,12 +9,50 @@ export class NgxHotjarService {
 
   constructor() { }
 
-  virtualPageView(path: string) {
-    /** @todo Check typef for Hotjar */
-    if (typeof window['hj'] === 'undefined') {
-      throw new Error('Hotjar is not loaded');
+  /**
+   * Fires an PageView event to an virtual url path
+   *
+   * @param path virtual url
+   */
+  virtualPageView(path: string): void {
+    try {
+      hj('vpv', path);
+    } catch (err) {
+      this.error(err);
     }
-    hj('vpv', path);
+  }
+
+  /**
+   * Fires an event on Hotjar. Use this method to trigger events on forms and start video recordings.
+   *
+   * @param path url
+   */
+  trigger(path: string): void {
+    try {
+      hj('trigger', path);
+    } catch (err) {
+      this.error(err);
+    }
+  }
+
+  /**
+   * This option is available in case you need to set up page change tracking manually
+   * within your app's router.
+   *
+   * @param path Path
+   */
+  stateChange(path: string): void {
+    try {
+      hj('stateChange', path);
+    } catch (err) {
+      this.error(err);
+    }
+  }
+
+  protected error(err): void {
+    // window.hj=window.hj||function(){(hj.q=hj.q||[]).push(arguments)};
+    /** @todo Check typef for Hotjar */
+    throw new Error('Hotjar is not loaded');
   }
 
 }
