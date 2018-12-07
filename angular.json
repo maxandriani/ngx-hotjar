@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ngx-hotjar",
+            "outputPath": "dist/ngx-hotjar-sdk",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -54,18 +54,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ngx-hotjar:build"
+            "browserTarget": "ngx-hotjar-sdk:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ngx-hotjar:build:production"
+              "browserTarget": "ngx-hotjar-sdk:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngx-hotjar:build"
+            "browserTarget": "ngx-hotjar-sdk:build"
           }
         },
         "test": {
@@ -107,11 +107,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ngx-hotjar:serve"
+            "devServerTarget": "ngx-hotjar-sdk:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ngx-hotjar:serve:production"
+              "devServerTarget": "ngx-hotjar-sdk:serve:production"
             }
           }
         },
@@ -162,5 +162,5 @@
       }
     }
   },
-  "defaultProject": "ngx-hotjar"
+  "defaultProject": "ngx-hotjar-sdk"
 }
