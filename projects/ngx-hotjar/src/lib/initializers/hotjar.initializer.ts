@@ -1,8 +1,8 @@
-import { APP_INITIALIZER } from '@angular/core';
+import { APP_INITIALIZER, Provider } from '@angular/core';
 import { IHotjarSettings } from '../interfaces/i-hotjar-settings';
 import { NGX_HOTJAR_SETTINGS_TOKEN } from '../tokens/ngx-hotjar-settings.token';
 
-export const NGX_HOTJAR_INITIALIZER_PROVIDER = {
+export const NGX_HOTJAR_INITIALIZER_PROVIDER: Provider = {
   provide: APP_INITIALIZER,
   multi: true,
   useFactory: HotjarInitializer,
