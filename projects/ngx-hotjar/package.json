@@ -1,6 +1,14 @@
 {
   "name": "ngx-hotjar",
-  "version": "0.0.1",
+  "description": "A simple ng-6 wrapper to load hotjar dependency by angular way",
+  "keywords": [ "hotjar", "angular", "angular-6+", "typescript" ],
+  "homepage": "https://github.com/maxandriani/ngx-hotjar",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maxandriani/ngx-hotjar"
+  },
+  "version": "0.0.2",
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0"

@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "publish": "ng build ngx-hotjar && cp \".\\README.md\" \".\\dist\\ngx-hotjar\\README.md\" && npm publish dist\\ngx-hotjar"
   },
   "private": true,
   "dependencies": {

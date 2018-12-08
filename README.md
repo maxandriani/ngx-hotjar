@@ -1,27 +1,78 @@
-# NgxHotjar
+# Ngx Hotjar
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.5.
+An easy implementation to track hotjar on angular6+ apps.
 
-## Development server
+**@TODO:** 
+* Create an Ng Router Helper;
+* Create unit tests;
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Install
 
-## Code scaffolding
+```
+npm install ngx-hotjar
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Feedbacks
 
-## Build
+https://github.com/maxandriani/ngx-hotjar
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Simple Configuration
 
-## Running unit tests
+```ts
+import { NgxHotjarModule } from 'ngx-hotjar';
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    NgxHotjarModule.forRoot('traking-code')
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
 
-## Running end-to-end tests
+## Virtual Page Views
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```ts
+class Component implements OnInit {
+  constructor(
+    protected $hotjar: NgxHotjarService
+  ) {}
 
-## Further help
+  ngOnInit() {
+    this.$hotjar.virtualPageView('/virtual/component/started');
+  }
+}
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Trigger events
+
+```ts
+class component implements OnInit {
+  constructor(
+    protected $hotjar: NgxHotjarService
+  ) {}
+
+  ngOnInit() {
+    this.$hotjar.trigger('my-event');
+  }
+}
+```
+
+## Trigger Page Navigation
+
+```ts
+class component implements OnInit {
+  constructor(
+    protected $hotjar: NgxHotjarService
+  ) {}
+
+  ngOnInit() {
+    this.$hotjar.stateChange(`${$router.urlAlterRedirects}`);
+  }
+}
+```
