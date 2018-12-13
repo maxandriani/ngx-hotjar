@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, Provider } from '@angular/core';
+import { APP_INITIALIZER, Provider, isDevMode } from '@angular/core';
 import { IHotjarSettings } from '../interfaces/i-hotjar-settings';
 import { NGX_HOTJAR_SETTINGS_TOKEN } from '../tokens/ngx-hotjar-settings.token';
 
@@ -15,8 +15,12 @@ export function HotjarInitializer(
   $settings: IHotjarSettings
 ) {
   return async () => {
-    if ($settings.trackingCode === '') {
-      console.error('Empty tracking-code. Maybe you forget to inject NGX_HOTJAT_SETTINGS_TOKEN on providers list');
+    if (!$settings.trackingCode) {
+      if (!isDevMode()) {
+        console.error('Empty tracking code for Hotjar. Make sure to provide one when initializing NgxHotjarModule.');
+      }
+
+      return;
     }
 
     (function(h: any, o: any, t: any, j: any, a?: any, r?: any) {
