@@ -8,7 +8,11 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "publish": "ng build ngx-hotjar && cp \".\\README.md\" \".\\dist\\ngx-hotjar\\README.md\" && npm publish dist\\ngx-hotjar"
+    "build-pkg": "ng build ngx-hotjar",
+    "cp": "cp \".\\README.md\" \".\\dist\\ngx-hotjar\\README.md\"",
+    "cp:win": "copy \".\\README.md\" \".\\dist\\ngx-hotjar\\README.md\"",
+    "publish": "npm run build-pkg && npm run cp && npm publish dist\\ngx-hotjar",
+    "publish:win": "npm run build-pkg && npm run cp:win && npm publish dist\\ngx-hotjar"
   },
   "private": true,
   "dependencies": {
