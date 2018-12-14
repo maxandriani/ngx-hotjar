@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { NgxHotjarModule } from 'projects/ngx-hotjar/src/public_api';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,7 @@ import { NgxHotjarModule } from 'projects/ngx-hotjar/src/public_api';
   ],
   imports: [
     BrowserModule,
-    NgxHotjarModule.forRoot('1061434')
+    NgxHotjarModule.forRoot(environment.hotjar)
   ],
   providers: [],
   bootstrap: [AppComponent]
