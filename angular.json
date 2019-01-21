@@ -160,6 +160,41 @@
           }
         }
       }
+    },
+    "ngx-google-analytics": {
+      "root": "projects/ngx-google-analytics",
+      "sourceRoot": "projects/ngx-google-analytics/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-google-analytics/tsconfig.lib.json",
+            "project": "projects/ngx-google-analytics/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-google-analytics/src/test.ts",
+            "tsConfig": "projects/ngx-google-analytics/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-google-analytics/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-google-analytics/tsconfig.lib.json",
+              "projects/ngx-google-analytics/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-hotjar-sdk"
