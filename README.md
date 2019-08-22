@@ -63,6 +63,20 @@ class component implements OnInit {
 }
 ```
 
+## Tag recordings
+
+```ts
+class component implements OnInit {
+  constructor(
+    protected $hotjar: NgxHotjarService
+  ) {}
+
+  ngOnInit() {
+    this.$hotjar.tagRecording(['tag1', 'tag2']);
+  }
+}
+```
+
 ## Trigger Page Navigation
 
 ```ts
