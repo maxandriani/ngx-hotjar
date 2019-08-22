@@ -19,17 +19,4 @@ steps:
     npm install -g @angular/cli
     npm install
     ng build ngx-hotjar
-  displayName: 'npm install and build library'
-- task: CopyFiles@2
-  inputs:
-    Contents: 'README.md'
-    TargetFolder: 'dist/ngx-hotjar'
-  displayName: 'Copy Readme.md file to dist folder'
-
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)/dist'
-    includeRootFolder: true
-    archiveType: '7z'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    replaceExistingArchive: true
+  displayName: 'npm install and build'

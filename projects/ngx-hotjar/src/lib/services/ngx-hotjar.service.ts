@@ -36,6 +36,19 @@ export class NgxHotjarService {
   }
 
   /**
+   * Allows you to tag recordings on Hotjar of all visitors passing through a page.
+   *
+   * @param path tags
+   */
+  tagRecording(path: string[]): void {
+    try {
+      hj('tagRecording', path);
+    } catch (err) {
+      this.error(err);
+    }
+  }
+
+  /**
    * This option is available in case you need to set up page change tracking manually
    * within your app's router.
    *
