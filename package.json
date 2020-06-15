@@ -3,16 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "prestart": "npm run build",
     "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
-    "build-pkg": "ng build ngx-hotjar",
-    "cp": "cp \".\\README.md\" \".\\dist\\ngx-hotjar\\README.md\"",
-    "cp:win": "copy \".\\README.md\" \".\\dist\\ngx-hotjar\\README.md\"",
-    "publish": "npm run build-pkg && npm run cp && npm publish dist\\ngx-hotjar",
-    "publish:win": "npm run build-pkg && npm run cp:win && npm publish dist\\ngx-hotjar"
+    "build": "ng build ngx-hotjar --prod",
+    "test": "ng test ngx-hotjar --browsers=ChromeHeadless --watch=false",
+    "test:dev": "ng test ngx-hotjar",
+    "lint": "ng lint ngx-hotjar",
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
