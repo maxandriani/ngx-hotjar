@@ -61,9 +61,9 @@ export class NgxHotjarService {
       this.error(err);
     }
   }
-  
+
   /**
-   * Signals form submission success 
+   * Signals form submission success
    */
   formSubmitSuccessful(): void {
     try {
@@ -72,9 +72,9 @@ export class NgxHotjarService {
       this.error(err);
     }
   }
-  
+
   /**
-   * Signals form submission failure 
+   * Signals form submission failure
    */
   formSubmitFailed(): void {
     try {
