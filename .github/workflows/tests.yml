@@ -40,6 +40,7 @@ jobs:
     - run: npm ci --ignore-scripts
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - run: npm rebuild
       
     - name: Build Angular Library
       run: npm run build

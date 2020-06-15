@@ -23,7 +23,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - run: npm ci --ignore-scripts
+      - run: npm ci
       - run: npm test
 
   bump-and-build:
@@ -45,7 +45,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - run: npm ci --ignore-scripts
+      - run: npm ci
       - run: npm --no-git-tag-version version ${{ steps.get_version.outputs.VERSION }}
       - run: npm --no-git-tag-version version ${{ steps.get_version.outputs.VERSION }}
         working-directory: projects/ngx-hotjar
