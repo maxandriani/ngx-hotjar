@@ -92,3 +92,28 @@ class component implements OnInit {
   }
 }
 ```
+
+## Send Form reports
+```ts
+class component implements OnInit {
+  constructor(
+    protected $hotjar: NgxHotjarService
+  ) {}
+
+  ngOnInit() {
+    
+    /* Validation code */
+    
+    if (valid) {
+      /* Validation passed - continue... */
+      this.$hotjar.formSubmitSuccessful();
+      
+    } else {
+		  /* Validation not passed - halt */
+      this.$hotjar.formSubmitFailed();
+      
+    }
+  }
+}
+```
+

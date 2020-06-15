@@ -61,6 +61,28 @@ export class NgxHotjarService {
       this.error(err);
     }
   }
+  
+  /**
+   * Signals form submission success 
+   */
+  formSubmitSuccessful(): void {
+    try {
+      hj('formSubmitSuccessful');
+    } catch (err) {
+      this.error(err);
+    }
+  }
+  
+  /**
+   * Signals form submission failure 
+   */
+  formSubmitFailed(): void {
+    try {
+      hj('formSubmitFailed');
+    } catch (err) {
+      this.error(err);
+    }
+  }
 
   protected error(err): void {
     // window.hj=window.hj||function(){(hj.q=hj.q||[]).push(arguments)};
