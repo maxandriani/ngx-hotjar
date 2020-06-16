@@ -10,6 +10,8 @@
 * Removed bad practices on direct access Document and Window objects;
 * Created RouterModule helper;
 * Add functions for Form reports for Ajax forms
+* Expose HJ() fn interface;
+* Expose HJ.* module lib;
 
 ## 0.0.4
 

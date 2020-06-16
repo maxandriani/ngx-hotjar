@@ -4,116 +4,108 @@
 
 An easy implementation to track hotjar on angular6+ apps. Feedbacks on https://github.com/maxandriani/ngx-hotjar
 
-**@TODO:** 
-* Create an Ng Router Helper;
-* Create unit tests;
-
 * [Setup](#setup)
+* [NgxHotjarService](#ngxhotjarservice)
 * [Changelog](./CHANGELOG.md)
 
-## Install
+## Setup
+
+### NPM 
+
+First, you should add ngx-hotjar as a package dependency.
 
 ```
 npm install ngx-hotjar
 ```
 
+### Angular Sertup
 
-## Simple Configuration
+After install `ngx-hotjar` package, you must add `NgxHotjarModule` on import list of your highest level application module, aka, AppModule. Please pay attention to provide a valid Hotjar Tracking Code (Site ID).
 
-```ts
-import { NgxHotjarModule } from 'ngx-hotjar';
-
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
+```typescript
+\@NgModule({
+  ...
   imports: [
-    BrowserModule,
-    NgxHotjarModule.forRoot('traking-code')
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    ...
+    NgxHotjarModule.forRoot(envorinment.hj)
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ]
 })
-export class AppModule { }
 ```
 
-## Virtual Page Views
+### Angular Router Setup
 
-```ts
-class Component implements OnInit {
-  constructor(
-    protected $hotjar: NgxHotjarService
-  ) {}
+We also provide a helper module to easy setup Hotjar navigation triggers on `Router` events. We just add an event listener on `Router`'s `NavigationEnd` event. But, if you feel that to over complicated, we provided an easy setup for you.
 
-  ngOnInit() {
-    this.$hotjar.virtualPageView('/virtual/component/started');
-  }
-}
+```typescript
+\@NgModule({
+  ...
+  imports: [
+    ...
+    NgxHotjarModule.forRoot(envorinment.hj),
+    NgxHotjajRouterModule
+// ^^^^^^^^^^^^^^^^^^^^^^^
+  ]
+})
 ```
 
-## Trigger events
+## NgxHotjarService
 
-```ts
-class component implements OnInit {
-  constructor(
-    protected $hotjar: NgxHotjarService
-  ) {}
+We also provide a Angular Service to wrap `hj()` function and avoid deal with/ typescript annoying warning when use unknown global functions.
 
-  ngOnInit() {
-    this.$hotjar.trigger('my-event');
-  }
-}
+### Hotjar Library Access
+
+Provide direct access to the `hj.*` static functions. If the desired function is not available on type definition, you can cast to `any` as following.
+
+```typescript
+(hjService.lib as any).myBrandNewStaticFn()
 ```
 
-## Tag recordings
+### Hotjar Direct Fn Calls
 
-```ts
-class component implements OnInit {
-  constructor(
-    protected $hotjar: NgxHotjarService
-  ) {}
+Expose Hotjar Function calls.
 
-  ngOnInit() {
-    this.$hotjar.tagRecording(['tag1', 'tag2']);
-  }
-}
+```typescript
+hjService.hj(... my args);
 ```
 
-## Trigger Page Navigation
+### Virtual Page View
 
-```ts
-class component implements OnInit {
-  constructor(
-    protected $hotjar: NgxHotjarService
-  ) {}
+Fires an PageView event on Hotjar. Use this method to trigger an virtual url path.
 
-  ngOnInit() {
-    this.$hotjar.stateChange(`${$router.urlAlterRedirects}`);
-  }
-}
+```typescript
+hjService.virtualPageView(path: string): void
 ```
 
-## Send Form reports
-```ts
-class component implements OnInit {
-  constructor(
-    protected $hotjar: NgxHotjarService
-  ) {}
+### Trigger Hotjar Events
 
-  ngOnInit() {
-    
-    /* Validation code */
-    
-    if (valid) {
-      /* Validation passed - continue... */
-      this.$hotjar.formSubmitSuccessful();
-      
-    } else {
-		  /* Validation not passed - halt */
-      this.$hotjar.formSubmitFailed();
-      
-    }
-  }
-}
+Fires an event on Hotjar. Use this method to trigger events on forms and start video recordings.
+
+```typescript
+hjService.trigger(path: string): void;
 ```
 
+### Tag Recording
+
+Allows you to tag recordings on Hotjar of all visitors passing through a page.
+
+```typescript
+hjService.tagRecording('tag1', 'tag2', 'tag3', ...);
+```
+
+### State Change
+
+This option is available in case you need to set up page change tracking manually.
+
+```typescript
+hjService.stateChange(path: string): void
+```
+
+### Form Events
+
+Signals form submission status.
+
+```typescript
+hjService.formSubmitSuccessful();
+hjService.formSubmitFailed();
+```
