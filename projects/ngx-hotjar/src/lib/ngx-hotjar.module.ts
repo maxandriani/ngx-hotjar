@@ -36,7 +36,7 @@ export class NgxHotjarModule {
    *
    * You private tracking code. This tracking code is also known as the same number as `SITE ID` inside Hotjar Dashboard.
    */
-  static forRoot(trackingCode: string, version: number = 6, uri?: string): ModuleWithProviders {
+  static forRoot(trackingCode: string, version: number = 6, uri?: string): ModuleWithProviders<NgxHotjarModule> {
     return {
       ngModule: NgxHotjarModule,
       providers: [
