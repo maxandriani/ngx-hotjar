@@ -1,93 +1,130 @@
-import { Injectable } from '@angular/core';
-
-declare var hj: Function;
+import { Injectable, Inject, isDevMode } from '@angular/core';
+import { NGX_HJ_FN } from '../tokens/ngx-hj-token';
+import { NGX_HOTJAR_SETTINGS_TOKEN } from '../tokens/ngx-hotjar-settings.token';
+import { IHotjarSettings } from '../interfaces/i-hotjar-settings';
+import { HjFn } from '../types/hj';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NgxHotjarService {
 
-  constructor() { }
-
   /**
-   * Fires an PageView event to an virtual url path
+   * Provide direct access to the `hj.*` static functions. If the desired function is not available on type definition, you can cast to `any` as following.
    *
-   * @param path virtual url
+```typescript
+(hjService.lib as any).myBrandNewStaticFn()
+```
    */
-  virtualPageView(path: string): void {
+  get lib(): HjFn {
+    return this._hj;
+  }
+
+  /** @ignore */
+  constructor(
+    /** @ignore */
+    @Inject(NGX_HJ_FN) private _hj: HjFn,
+    /** @ignore */
+    @Inject(NGX_HOTJAR_SETTINGS_TOKEN) private settings: IHotjarSettings
+  ) { }
+
+  /** Expose Hotjar Function calls */
+  hj(...args: Array<any>) {
     try {
-      hj('vpv', path);
+      this._hj(...args);
     } catch (err) {
-      this.error(err);
+      if (isDevMode() || this.settings.ennableTracing) {
+        console.error(err.message);
+      }
     }
   }
 
   /**
-   * Fires an event on Hotjar. Use this method to trigger events on forms and start video recordings.
+   * Fires an PageView event on Hotjar. Use this method to trigger an virtual url path. The same as
    *
-   * @param path url
+```typescript
+hj('vpv', path)
+```
+   */
+  virtualPageView(path: string): void {
+    this.hj('vpv', path);
+  }
+
+  /**
+   * Fires an event on Hotjar. Use this method to trigger events on forms and start video recordings. Same as
+   *
+```typescript
+hj('trigger', path)
+```
    */
   trigger(path: string): void {
-    try {
-      hj('trigger', path);
-    } catch (err) {
-      this.error(err);
-    }
+    this.hj('trigger', path);
   }
 
   /**
    * Allows you to tag recordings on Hotjar of all visitors passing through a page.
    *
-   * @param path tags
+   * You can create multiple tags by providing aditional arguments
+   *
+   * @deprecated
+   *
+```typescript
+hjService.tagRecording(['tag1', 'tag2', 'tag3', ...]);
+hj('tagRecording', ['tag1', 'tag2', 'tag3', ...])
+```
    */
-  tagRecording(path: string[]): void {
-    try {
-      hj('tagRecording', path);
-    } catch (err) {
-      this.error(err);
+  tagRecording(tagOrCollection: string[]): void;
+  /**
+   * Allows you to tag recordings on Hotjar of all visitors passing through a page.
+   *
+   * You can create multiple tags by providing aditional arguments
+   *
+```typescript
+hjService.tagRecording('tag1', 'tag2', 'tag3', ...);
+hj('tagRecording', ['tag1', 'tag2', 'tag3', ...])
+```
+   */
+  tagRecording(tagOrCollection: string, ...tags: Array<string>): void;
+  tagRecording(tagOrCollection: string | Array<string>, ...tags: Array<string>): void {
+    // Retrocompatibility
+    if (!Array.isArray(tagOrCollection)) {
+      tagOrCollection = [tagOrCollection];
     }
+    this.hj('tagRecording', tagOrCollection.concat(...tags));
   }
 
   /**
    * This option is available in case you need to set up page change tracking manually
    * within your app's router.
    *
-   * @param path Path
+```typescript
+hj('stateChange', path)
+```
    */
   stateChange(path: string): void {
-    try {
-      hj('stateChange', path);
-    } catch (err) {
-      this.error(err);
-    }
+    this.hj('stateChange', path);
   }
 
   /**
    * Signals form submission success
+   *
+```typescript
+hj('formSubmitSuccessful');
+```
    */
   formSubmitSuccessful(): void {
-    try {
-      hj('formSubmitSuccessful');
-    } catch (err) {
-      this.error(err);
-    }
+    this.hj('formSubmitSuccessful');
   }
 
   /**
    * Signals form submission failure
+   *
+```typescript
+hj('formSubmitFailed');
+```
    */
   formSubmitFailed(): void {
-    try {
-      hj('formSubmitFailed');
-    } catch (err) {
-      this.error(err);
-    }
-  }
-
-  protected error(err): void {
-    // window.hj=window.hj||function(){(hj.q=hj.q||[]).push(arguments)};
-    /** @todo Check typef for Hotjar */
-    throw new Error('Hotjar is not loaded');
+    this.hj('formSubmitFailed');
   }
 
 }
