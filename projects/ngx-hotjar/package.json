@@ -1,7 +1,7 @@
 {
   "name": "ngx-hotjar",
   "description": "A simple ng-6 wrapper to load hotjar dependency by angular way",
-  "keywords": [ "hotjar", "angular", "angular-6+", "typescript" ],
+  "keywords": [ "hotjar", "angular", "typescript" ],
   "homepage": "https://github.com/maxandriani/ngx-hotjar",
   "license": "MIT",
   "repository": {
