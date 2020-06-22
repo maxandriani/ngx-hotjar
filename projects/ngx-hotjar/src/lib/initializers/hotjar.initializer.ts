@@ -61,7 +61,7 @@ export function HotjarInitializer(
 
     const head = document.querySelector('head'),
           script = document.createElement('script'),
-          uri = `https://static.hotjar.com/c/hotjar-${hjWindow._hjSettings.hjid}.js?sv=${hjWindow._hjSettings.version}`;
+          uri = `https://static.hotjar.com/c/hotjar-${hjWindow._hjSettings.hjid}.js?sv=${hjWindow._hjSettings.hjsv}`;
 
     script.async = true;
     script.src = (settings.uri || uri);
