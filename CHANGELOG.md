@@ -1,9 +1,24 @@
 # Changelogs
 
+* [7.0.2](#7.0.2)
+* [7.0.1](#7.0.1)
+* [7.0.0](#7.0.0)
 * [6.0.2](#6.0.2)
 * [6.0.1](#6.0.1)
 * [6.0.0](#6.0.0)
 * [0.0.4](#0.0.4)
+
+## 7.0.2
+
+* Fixed initialization script to build `hj()` function on `APP_INITIALIZER`;
+
+## 7.0.1
+
+* Fixed wrong property used for version in script src;
+
+## 7.0.0
+
+* Bump Angular Version to ^7
 
 ## 6.0.2
 
