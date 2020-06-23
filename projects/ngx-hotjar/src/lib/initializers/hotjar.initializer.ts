@@ -52,14 +52,22 @@ export function hotjarInitializer(
       return;
     }
 
-    Object.defineProperty(window, 'hj', { value: (window.hj || function() {
-      (window.hj.q = window.hj.q || []).push(arguments);
-    }) });
+    Object.defineProperty(window, 'hj', { 
+      value: (window.hj || function() {
+        (window.hj.q = window.hj.q || []).push(arguments);
+      }),
+      configurable: true,
+      writable: true
+    });
 
     Object.defineProperty(
       window,
       '_hjSettings',
-      { value: { hjid: settings.trackingCode, hjsv: (settings.version || 6) } }
+      { 
+        value: { hjid: settings.trackingCode, hjsv: (settings.version || 6) },
+        configurable: true,
+        writable: true
+      }
     );
 
     const head = document.querySelector('head'),
