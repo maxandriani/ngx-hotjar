@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  hotjar: 'test-code'
+  hotjar: '22334'
 };
 
 /*

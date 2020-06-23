@@ -23,12 +23,9 @@ import { NGX_HOTJAR_SETTINGS_TOKEN } from './tokens/ngx-hotjar-settings.token';
 ```
  */
 @NgModule({
-  imports: [
-  ],
+  imports: [],
   declarations: [],
-  exports: [],
-  providers: [
-  ]
+  exports: []
 })
 export class NgxHotjarModule {
   /**
@@ -36,7 +33,7 @@ export class NgxHotjarModule {
    *
    * You private tracking code. This tracking code is also known as the same number as `SITE ID` inside Hotjar Dashboard.
    */
-  static forRoot(trackingCode: string, version: number = 6, uri?: string): ModuleWithProviders {
+  static forRoot(trackingCode: string, version: number = 6, uri?: string): ModuleWithProviders<NgxHotjarModule> {
     return {
       ngModule: NgxHotjarModule,
       providers: [
@@ -48,7 +45,7 @@ export class NgxHotjarModule {
             uri
           }
         },
-        NGX_HOTJAR_INITIALIZER_PROVIDER,
+        NGX_HOTJAR_INITIALIZER_PROVIDER
       ]
     };
   }

@@ -7,11 +7,7 @@ import { HjFn } from '../types/hj';
  */
 export function getHjFn(window: Window & { hj?: HjFn }): HjFn {
   // // h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-  return (window)
-    ? window.hj = (window.hj || function() {
-        (window.hj.q = window.hj.q || []).push(arguments);
-      }) as HjFn
-    : null;
+  return (window) ? window.hj : null;
 }
 
 /**
