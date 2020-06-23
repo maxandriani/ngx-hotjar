@@ -3,6 +3,7 @@ import { IHotjarSettings } from '../interfaces/i-hotjar-settings';
 import { NGX_HOTJAR_SETTINGS_TOKEN } from '../tokens/ngx-hotjar-settings.token';
 import { DOCUMENT } from '@angular/common';
 import { WINDOW } from '../tokens/window-token';
+import { HjFn } from '../types/hj';
 
 /**
  * Provides a TOKEN to manually configure Hojtar tracking code by angular way.
@@ -10,7 +11,7 @@ import { WINDOW } from '../tokens/window-token';
 export const NGX_HOTJAR_INITIALIZER_PROVIDER: Provider = {
   provide: APP_INITIALIZER,
   multi: true,
-  useFactory: HotjarInitializer,
+  useFactory: hotjarInitializer,
   deps: [
     NGX_HOTJAR_SETTINGS_TOKEN,
     DOCUMENT,
@@ -21,10 +22,10 @@ export const NGX_HOTJAR_INITIALIZER_PROVIDER: Provider = {
 /**
  * Configuration Factory to create hotjar install script tag and attache on DOM at angular initialization.
  */
-export function HotjarInitializer(
+export function hotjarInitializer(
   settings: IHotjarSettings,
   document: Document,
-  window: Window
+  window: Window & { hj?: HjFn, _hjSettings?: { hjid: string, hjsv: number } }
 ) {
   return async () => {
     if (!settings.trackingCode) {
@@ -51,17 +52,27 @@ export function HotjarInitializer(
       return;
     }
 
-    // (function(h: any, o: any, t: any, j: any, a?: any, r?: any) {
-    // h._hjSettings = { hjid: $settings.trackingCode, hjsv: $settings.version || 6 };
-    const hjWindow = Object.defineProperty(
+    Object.defineProperty(window, 'hj', { 
+      value: (window.hj || function() {
+        (window.hj.q = window.hj.q || []).push(arguments);
+      }),
+      configurable: true,
+      writable: true
+    });
+
+    Object.defineProperty(
       window,
       '_hjSettings',
-      { value: { hjid: settings.trackingCode, hjsv: settings.version || 6 } }
+      { 
+        value: { hjid: settings.trackingCode, hjsv: (settings.version || 6) },
+        configurable: true,
+        writable: true
+      }
     );
 
     const head = document.querySelector('head'),
           script = document.createElement('script'),
-          uri = `https://static.hotjar.com/c/hotjar-${hjWindow._hjSettings.hjid}.js?sv=${hjWindow._hjSettings.hjsv}`;
+          uri = `https://static.hotjar.com/c/hotjar-${window._hjSettings.hjid}.js?sv=${window._hjSettings.hjsv}`;
 
     script.async = true;
     script.src = (settings.uri || uri);

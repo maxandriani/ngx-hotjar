@@ -13,6 +13,5 @@ export function getWindow(platformId: any) {
  * Provide DOM Window reference or null if the environment is not a Browser.
  */
 export const WINDOW = new InjectionToken<Window>('hj-window', {
-  providedIn: 'root',
   factory: () => getWindow(inject(PLATFORM_ID)),
 });

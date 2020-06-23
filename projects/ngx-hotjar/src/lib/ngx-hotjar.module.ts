@@ -23,12 +23,9 @@ import { NGX_HOTJAR_SETTINGS_TOKEN } from './tokens/ngx-hotjar-settings.token';
 ```
  */
 @NgModule({
-  imports: [
-  ],
+  imports: [],
   declarations: [],
-  exports: [],
-  providers: [
-  ]
+  exports: []
 })
 export class NgxHotjarModule {
   /**
@@ -48,7 +45,7 @@ export class NgxHotjarModule {
             uri
           }
         },
-        NGX_HOTJAR_INITIALIZER_PROVIDER,
+        NGX_HOTJAR_INITIALIZER_PROVIDER
       ]
     };
   }
