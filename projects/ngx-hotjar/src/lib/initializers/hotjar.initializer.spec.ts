@@ -10,7 +10,14 @@ describe('HotjarInitializer()', () => {
     const script = document.querySelector('script[src^="https://static.hotjar.com/c/hotjar"]');
     head.removeChild(script);
     script.remove();
-  })
+  });
+
+  beforeEach(() => {
+    const head = document.getElementsByTagName('head')[0];
+    const script = document.querySelector('script[src^="https://static.hotjar.com/c/hotjar"]');
+    head.removeChild(script);
+    script.remove();
+  });
 
   it('should not initialize when trackingCode is empty', async () => {
     const settings = { trackingCode: '', version: 6, ennableTracing: false },
