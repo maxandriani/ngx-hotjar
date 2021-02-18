@@ -7,16 +7,20 @@ describe('HotjarInitializer()', () => {
 
   afterEach(() => {
     const head = document.getElementsByTagName('head')[0];
-    const script = document.querySelector('script[src^="https://static.hotjar.com/c/hotjar"]');
-    head.removeChild(script);
-    script.remove();
+    const script = document.querySelectorAll('script[src^="https://static.hotjar.com"]');
+    script.forEach(s => {
+      head.removeChild(s)
+      .remove();
+    });
   });
 
   beforeEach(() => {
     const head = document.getElementsByTagName('head')[0];
-    const script = document.querySelector('script[src^="https://static.hotjar.com/c/hotjar"]');
-    head.removeChild(script);
-    script.remove();
+    const script = document.querySelectorAll('script[src^="https://static.hotjar.com"]');
+    script.forEach(s => {
+      head.removeChild(s)
+      .remove();
+    });
   });
 
   it('should not initialize when trackingCode is empty', async () => {
