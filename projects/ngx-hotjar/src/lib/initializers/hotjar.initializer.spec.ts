@@ -5,6 +5,11 @@ import { WINDOW } from '../tokens/window-token';
 
 describe('HotjarInitializer()', () => {
 
+  afterEach(() => {
+    const script = document.querySelector('script[src^="https://static.hotjar.com/c/hotjar"]');
+    script?.remove();
+  })
+
   it('should not initialize when trackingCode is empty', async () => {
     const settings = { trackingCode: '', version: 6, ennableTracing: false },
           document = TestBed.get(DOCUMENT),

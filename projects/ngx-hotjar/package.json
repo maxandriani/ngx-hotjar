@@ -8,9 +8,8 @@
     "type": "git",
     "url": "https://github.com/maxandriani/ngx-hotjar"
   },
-  "version": "0.0.5",
-  "peerDependencies": {
-    "@angular/common": "^9",
-    "@angular/core": "^9"
-  }
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "version": "0.0.5"
 }
