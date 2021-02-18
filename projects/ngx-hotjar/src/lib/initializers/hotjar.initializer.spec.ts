@@ -6,8 +6,10 @@ import { WINDOW } from '../tokens/window-token';
 describe('HotjarInitializer()', () => {
 
   afterEach(() => {
+    const head = document.getElementsByTagName('head')[0];
     const script = document.querySelector('script[src^="https://static.hotjar.com/c/hotjar"]');
-    script?.remove();
+    head.removeChild(script);
+    script.remove();
   })
 
   it('should not initialize when trackingCode is empty', async () => {
