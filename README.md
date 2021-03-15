@@ -18,7 +18,7 @@ First, you should add ngx-hotjar as a package dependency.
 npm install ngx-hotjar
 ```
 
-### Angular Sertup
+### Angular Setup
 
 After install `ngx-hotjar` package, you must add `NgxHotjarModule` on import list of your highest level application module, aka, AppModule. Please pay attention to provide a valid Hotjar Tracking Code (Site ID).
 
