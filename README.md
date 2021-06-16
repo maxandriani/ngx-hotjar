@@ -43,7 +43,7 @@ We also provide a helper module to easy setup Hotjar navigation triggers on `Rou
   imports: [
     ...
     NgxHotjarModule.forRoot(envorinment.hj),
-    NgxHotjajRouterModule
+    NgxHotjarRouterModule
 // ^^^^^^^^^^^^^^^^^^^^^^^
   ]
 })
