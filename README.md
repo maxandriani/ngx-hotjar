@@ -48,7 +48,7 @@ import { NgxHotjarModule, NgxHotjarRouterModule } from 'ngx-hotjar';
   ...
   imports: [
     ...
-    NgxHotjarModule.forRoot(environment.hj),
+    NgxHotjarModule.forRoot(envorinment.hj),
     NgxHotjarRouterModule
 // ^^^^^^^^^^^^^^^^^^^^^^^
   ]
