@@ -6,7 +6,7 @@ import { WINDOW } from '../tokens/window-token';
 import { HjFn } from '../types/hj';
 
 /**
- * Provides a TOKEN to manually configure Hojtar tracking code by angular way.
+ * Provides a TOKEN to manually configure Hotjar tracking code by angular way.
  */
 export const NGX_HOTJAR_INITIALIZER_PROVIDER: Provider = {
   provide: APP_INITIALIZER,
